@@ -1,80 +1,88 @@
 body {
-font-family: Arial, sans-serif;
-background-color: #f4e4c1;
-color: #3e2723;
-margin: 0;
-padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f4e4c1;
+  color: #3e2723;
+  margin: 0;
+  padding: 0;
 }
 
 header {
-text-align: center;
-padding: 20px;
-background-color: #8d6e63;
-color: white;
+  text-align: center;
+  padding: 20px;
+  background-color: #8d6e63;
+  color: white;
 }
 
 .profile img {
-width: 150px;
-height: auto;
-border-radius: 30%;
-margin-bottom: 10px;
+  width: 150px;
+  height: auto;
+  border-radius: 30%;
+  margin-bottom: 10px;
 }
-#snakeGame{
-display: block;
-margin: 20px auto;
-border: 2px solid #3e2723;
+
+#snakeGame {
+  display: block;
+  margin: 20px auto;
+  border: 2px solid #3e2723;
 }
+
 #startGameButton {
-display: block;
-margin: 10px auto;
-padding: 10px 20px;
-font-size: 16px;
-background-color: #8d6e63;
-color: white;
-border: none;
-cursor: pointer;
-border-radius: 5px;
-transition: background-color 0.3s ease;
+  display: block;
+  margin: 10px auto;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #8d6e63;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
 }
 
 #startGameButton:hover {
-background-color: #5d4037;
-}
+  background-color: #5d4037;
 }
 
 nav ul {
-list-style: none;
-padding: 0;
+  list-style: none;
+  padding: 0;
+  text-align: center;
 }
 
 nav ul li {
-display: inline;
-margin: 0 10px;
+  display: inline;
+  margin: 0 10px;
 }
 
 nav ul li a {
-color: white;
-text-decoration: none;
+  color: white;
+  text-decoration: none;
 }
 
 section {
-padding: 20px;
+  padding: 20px;
 }
 
 footer {
-text-align: center;
-background-color: #3e2723;
-color: white;
-padding: 10px;
+  text-align: center;
+  background-color: #3e2723;
+  color: white;
+  padding: 10px;
+}
+
+footer .social-media {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0;
+  display: flex;
+  justify-content: center;
 }
 
 footer .social-media li {
-
-
-margin: 0 10px;
+  margin: 0 10px;
 }
 
 footer .social-media a {
-color: #f4e4c1;
-text-decoration: none;
+  color: #f4e4c1;
+  text-decoration: none;
 }
