@@ -1,17 +1,26 @@
 const canvas = document.getElementById("snakeGame");
 const ctx = canvas.getContext("2d");
+const startButton = document.getElementById("startGameButton");
 
 const gridSize = 20;
 let snake = [{ x: 100, y: 100 }];
 let food = spawnFood();
 let direction = { x: gridSize, y: 0 };
-let isGameRunning = true;
+let isGameRunning = false;
 
+startButton.addEventListener("click", startGame);
 document.addEventListener("keydown", changeDirection);
+
+function startGame() {
+  isGameRunning = true;
+  startButton.style.display = "none";
+  canvas.style.display = "block";
+  gameLoop();
+}
 
 function gameLoop() {
   if (!isGameRunning) return;
-  
+
   setTimeout(() => {
     clearCanvas();
     drawFood();
@@ -29,9 +38,7 @@ function clearCanvas() {
 
 function drawSnake() {
   ctx.fillStyle = "#3e2723";
-  snake.forEach(part => {
-    ctx.fillRect(part.x, part.y, gridSize, gridSize);
-  });
+  snake.forEach(part => ctx.fillRect(part.x, part.y, gridSize, gridSize));
 }
 
 function moveSnake() {
@@ -51,15 +58,10 @@ function changeDirection(event) {
   const goingRight = direction.x === gridSize;
   const goingLeft = direction.x === -gridSize;
 
-  if (keyPressed === 37 && !goingRight) {
-    direction = { x: -gridSize, y: 0 };
-  } else if (keyPressed === 38 && !goingDown) {
-    direction = { x: 0, y: -gridSize };
-  } else if (keyPressed === 39 && !goingLeft) {
-    direction = { x: gridSize, y: 0 };
-  } else if (keyPressed === 40 && !goingUp) {
-    direction = { x: 0, y: gridSize };
-  }
+  if (keyPressed === 37 && !goingRight) direction = { x: -gridSize, y: 0 };
+  else if (keyPressed === 38 && !goingDown) direction = { x: 0, y: -gridSize };
+  else if (keyPressed === 39 && !goingLeft) direction = { x: gridSize, y: 0 };
+  else if (keyPressed === 40 && !goingUp) direction = { x: 0, y: gridSize };
 }
 
 function drawFood() {
@@ -83,8 +85,14 @@ function checkCollision() {
     snake.slice(1).some(part => part.x === head.x && part.y === head.y)
   ) {
     isGameRunning = false;
-    alert("Oyun bitti! Yeniden başlamak için sayfayı yenileyin.");
+    alert("Oyun bitti! Yeniden başlatmak için 'Oyun Başlat' butonuna tıklayın.");
+    resetGame();
   }
 }
 
-gameLoop();
+function resetGame() {
+  snake = [{ x: 100, y: 100 }];
+  direction = { x: gridSize, y: 0 };
+  startButton.style.display = "block";
+  canvas.style.display = "none";
+}
