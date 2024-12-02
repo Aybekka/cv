@@ -1,0 +1,57 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4e4c1;
+  color: #3e2723;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  text-align: center;
+  padding: 20px;
+  background-color: #8d6e63;
+  color: white;
+}
+
+.profile img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+}
+
+nav ul li {
+  display: inline;
+  margin: 0 10px;
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+}
+
+section {
+  padding: 20px;
+}
+
+footer {
+  text-align: center;
+  background-color: #3e2723;
+  color: white;
+  padding: 10px;
+}
+
+footer .social-media li {
+  display: inline;
+  margin: 0 10px;
+}
+
+footer .social-media a {
+  color: #f4e4c1;
+  text-decoration: none;
+}
