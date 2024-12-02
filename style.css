@@ -70,11 +70,19 @@ footer {
 }
 
 footer .social-media li {
+  text-align:center;
+  padding:10px;
   display: inline;
-  margin: 0 10px;
+  
+}
+footer .h3{
+  text-align:center;
+  
 }
 
 footer .social-media a {
   color: #f4e4c1;
   text-decoration: none;
+  padding: 10px;
+  text-align:center;
 }
