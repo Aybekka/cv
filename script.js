@@ -1,6 +1,7 @@
 const canvas = document.getElementById("snakeGame");
 const ctx = canvas.getContext("2d");
 const startButton = document.getElementById("startGameButton");
+const snakeGameSection = document.getElementById("snake-game-section");
 
 const gridSize = 20;
 let snake = [{ x: 100, y: 100 }];
@@ -16,6 +17,7 @@ function startGame() {
   isGameRunning = true;
   startButton.style.display = "none";
   canvas.style.display = "block";
+  snakeGameSection.scrollIntoView({ behavior: "smooth" }); // Sayfayı aşağı kaydır
   gameLoop();
 }
 
