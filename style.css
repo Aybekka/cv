@@ -80,7 +80,10 @@ footer .social-media {
 footer .social-media li {
   margin: 0 10px;
 }
-
+footer .h3{
+  color:#f4e4c1;
+  
+}
 footer .social-media a {
   color: #f4e4c1;
   text-decoration: none;
