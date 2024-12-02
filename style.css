@@ -72,7 +72,8 @@ footer {
 footer .social-media li {
   text-align:center;
   padding:10px;
-  display: inline;
+  display: flex;
+  justify-content:center;
   
 }
 footer .h3{
