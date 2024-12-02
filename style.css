@@ -15,7 +15,7 @@ header {
 
 .profile img {
   width: 150px;
-  height: 250px;
+  height: auto;
   border-radius: 30%;
   margin-bottom: 10px;
 }
