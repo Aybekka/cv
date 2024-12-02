@@ -66,6 +66,7 @@ footer {
   background-color: #3e2723;
   color: white;
   padding: 10px;
+  justify-content: center;
 }
 
 footer .social-media li {
