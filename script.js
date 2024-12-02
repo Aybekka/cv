@@ -10,6 +10,7 @@ let isGameRunning = false;
 
 startButton.addEventListener("click", startGame);
 document.addEventListener("keydown", changeDirection);
+document.addEventListener("keydown", preventArrowScroll);
 
 function startGame() {
   isGameRunning = true;
@@ -62,6 +63,13 @@ function changeDirection(event) {
   else if (keyPressed === 38 && !goingDown) direction = { x: 0, y: -gridSize };
   else if (keyPressed === 39 && !goingLeft) direction = { x: gridSize, y: 0 };
   else if (keyPressed === 40 && !goingUp) direction = { x: 0, y: gridSize };
+}
+
+function preventArrowScroll(event) {
+  const arrowKeys = [37, 38, 39, 40];
+  if (arrowKeys.includes(event.keyCode)) {
+    event.preventDefault();
+  }
 }
 
 function drawFood() {
