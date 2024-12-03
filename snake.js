@@ -18,27 +18,42 @@ let score = 0;
 function updateScore() {
   document.getElementById("scoreDisplay").innerText = `Skor: ${score}`;
 }
+CanvasRenderingContext2D.prototype.roundRect = function(x, y, w, h, r) {
+  this.beginPath();
+  this.moveTo(x + r, y);
+  this.arcTo(x + w, y, x + w, y + h, r);
+  this.arcTo(x + w, y + h, x, y + h, r);
+  this.arcTo(x, y + h, x, y, r);
+  this.arcTo(x, y, x + w, y, r);
+  this.closePath();
+  return this;
+};
+
+
 function startGame() {
   isGameRunning = true;
   score = 0;
   updateScore();
   startButton.style.display = "none";
   canvas.style.display = "block";
-  snakeGameSection.scrollIntoView({ behavior: "smooth" });
-  
-  // Başlangıç animasyonu
+  animateStart(() => gameLoop());
+}
+
+function animateStart(callback) {
   let scale = 0.1;
-  let interval = setInterval(() => {
+  const interval = setInterval(() => {
     if (scale >= 1) {
       clearInterval(interval);
-      gameLoop();
+      callback();
     }
-    ctx.save();
-    ctx.scale(scale, scale);
     clearCanvas();
+    ctx.save();
+    ctx.translate(canvas.width / 2, canvas.height / 2);
+    ctx.scale(scale, scale);
+    ctx.translate(-canvas.width / 2, -canvas.height / 2);
     drawSnake();
     ctx.restore();
-    scale += 0.1;
+    scale += 0.05;
   }, 50);
 }
 
@@ -70,12 +85,12 @@ function drawSnake() {
   ctx.shadowColor = "#8d6e63";
   ctx.shadowBlur = 10;
   snake.forEach(part => {
-    ctx.beginPath();
-    ctx.roundRect(part.x, part.y, gridSize, gridSize, 5); // Yuvarlak köşe
-    ctx.fill();
+    ctx.roundRect(part.x, part.y, gridSize, gridSize, 5).fill();
   });
-  ctx.shadowBlur = 0; // Gölgeyi sadece yılan için etkinleştir
+  ctx.shadowBlur = 0;
 }
+
+
 
 
 
@@ -120,8 +135,8 @@ function preventArrowScroll(event) {
 }
 
 function drawFood() {
-  ctx.fillStyle = "#8d6e63";
-  ctx.shadowColor = "#3e2723";
+  ctx.fillStyle = "#ff6f61";
+  ctx.shadowColor = "#d32f2f";
   ctx.shadowBlur = 15;
   ctx.beginPath();
   ctx.arc(food.x + gridSize / 2, food.y + gridSize / 2, gridSize / 2, 0, Math.PI * 2);
