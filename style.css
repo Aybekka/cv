@@ -19,6 +19,13 @@ header {
   border-radius: 30%;
   margin-bottom: 10px;
 }
+#scoreDisplay {
+  font-size: 24px;
+  font-weight: bold;
+  color: #3e2723;
+  text-align: center;
+  margin-bottom: 10px;
+}
 
 #snakeGame {
   display: block;
