@@ -25,7 +25,21 @@ function startGame() {
   startButton.style.display = "none";
   canvas.style.display = "block";
   snakeGameSection.scrollIntoView({ behavior: "smooth" });
-  gameLoop();
+  
+  // Başlangıç animasyonu
+  let scale = 0.1;
+  let interval = setInterval(() => {
+    if (scale >= 1) {
+      clearInterval(interval);
+      gameLoop();
+    }
+    ctx.save();
+    ctx.scale(scale, scale);
+    clearCanvas();
+    drawSnake();
+    ctx.restore();
+    scale += 0.1;
+  }, 50);
 }
 
 
@@ -44,14 +58,26 @@ function gameLoop() {
 }
 
 function clearCanvas() {
-  ctx.fillStyle = "#f4e4c1";
+  let gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+  gradient.addColorStop(0, "#f4e4c1");
+  gradient.addColorStop(1, "#e3b081");
+  ctx.fillStyle = gradient;
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 }
 
 function drawSnake() {
   ctx.fillStyle = "#3e2723";
-  snake.forEach(part => ctx.fillRect(part.x, part.y, gridSize, gridSize));
+  ctx.shadowColor = "#8d6e63";
+  ctx.shadowBlur = 10;
+  snake.forEach(part => {
+    ctx.beginPath();
+    ctx.roundRect(part.x, part.y, gridSize, gridSize, 5); // Yuvarlak köşe
+    ctx.fill();
+  });
+  ctx.shadowBlur = 0; // Gölgeyi sadece yılan için etkinleştir
 }
+
+
 
 function moveSnake() {
   let head = { x: snake[0].x + direction.x, y: snake[0].y + direction.y };
@@ -95,7 +121,12 @@ function preventArrowScroll(event) {
 
 function drawFood() {
   ctx.fillStyle = "#8d6e63";
-  ctx.fillRect(food.x, food.y, gridSize, gridSize);
+  ctx.shadowColor = "#3e2723";
+  ctx.shadowBlur = 15;
+  ctx.beginPath();
+  ctx.arc(food.x + gridSize / 2, food.y + gridSize / 2, gridSize / 2, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.shadowBlur = 0;
 }
 
 function spawnFood() {
