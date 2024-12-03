@@ -13,13 +13,22 @@ startButton.addEventListener("click", startGame);
 document.addEventListener("keydown", changeDirection);
 document.addEventListener("keydown", preventArrowScroll);
 
+let score = 0;
+
+function updateScore() {
+  document.getElementById("scoreDisplay").innerText = `Skor: ${score}`;
+}
 function startGame() {
   isGameRunning = true;
+  score = 0;
+  updateScore();
   startButton.style.display = "none";
   canvas.style.display = "block";
-  snakeGameSection.scrollIntoView({ behavior: "smooth" }); // Sayfayı aşağı kaydır
+  snakeGameSection.scrollIntoView({ behavior: "smooth" });
   gameLoop();
 }
+
+
 
 function gameLoop() {
   if (!isGameRunning) return;
@@ -45,10 +54,20 @@ function drawSnake() {
 }
 
 function moveSnake() {
-  const head = { x: snake[0].x + direction.x, y: snake[0].y + direction.y };
+  let head = { x: snake[0].x + direction.x, y: snake[0].y + direction.y };
+
+  // Duvarlardan geçiş
+  if (head.x < 0) head.x = canvas.width - gridSize;
+  else if (head.x >= canvas.width) head.x = 0;
+  if (head.y < 0) head.y = canvas.height - gridSize;
+  else if (head.y >= canvas.height) head.y = 0;
+
   snake.unshift(head);
+
   if (head.x === food.x && head.y === food.y) {
     food = spawnFood();
+    score++; // Skoru artır
+    updateScore();
   } else {
     snake.pop();
   }
@@ -103,6 +122,8 @@ function checkCollision() {
 function resetGame() {
   snake = [{ x: 100, y: 100 }];
   direction = { x: gridSize, y: 0 };
+  score = 0;
+  updateScore();
   startButton.style.display = "block";
   canvas.style.display = "none";
 }
